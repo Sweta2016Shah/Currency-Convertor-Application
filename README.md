@@ -13,17 +13,29 @@ A Spring Boot REST API that loads currency exchange rates from an XML file into 
 ```
 src/
 ├── main/
-│   ├── java/com/example/currencyconverter/
-│   │   ├── entity/          CurrencyDetail.java
-│   │   ├── repository/      CurrencyConvertorRepository.java
-│   │   ├── service/         CurrencyConvertorService.java
-│   │   ├── controller/      CurrencyConvertorController.java
-        └──          DataLoader.java
+│   ├── java/com/example/currency_converter_service/
+│   │   ├── advice/
+│   │   │   ├── ErrorResponseDto.java
+│   │   │   └── GlobalExceptionHandler.java
+│   │   ├── config/
+│   │   │   └── AppConfig.java
+│   │   ├── controller/
+│   │   │   └── CurrencyConvertorController.java
+│   │   ├── dto/
+│   │   │   └── CurrencyDetailDto.java
+│   │   ├── entity/
+│   │   │   └── CurrencyDetail.java
+│   │   ├── exception/
+│   │   │   └── ResourceNotFoundException.java
+│   │   ├── repository/
+│   │   │   └── CurrencyConvertorRepository.java
+│   │   ├── service/
+│   │   │   ├── CurrencyConvertorService.java
+│   │   │   └── CurrencyConvertorServiceImpl.java
+│   │   ├── CurrencyConverterServiceApplication.java
+│   │   └── DataLoader.java
 │   └── resources/
 │       ├── fx-rates.xml
-│       └── application.properties
-       
-```
 
 ## Setup & Run
 
@@ -44,7 +56,7 @@ mvn spring-boot:run
 
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | /api/currency/convert?from=USD&to=INR&amount=100 | Convert currency |
+| GET | /convert?from=USD&to=INR&amount=100 | Convert currency |
 
 ## H2 Console
 ```
