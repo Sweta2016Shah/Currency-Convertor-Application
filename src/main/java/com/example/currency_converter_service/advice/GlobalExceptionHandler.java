@@ -5,8 +5,11 @@ import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.List;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -17,9 +20,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponseDto, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponseDto> handleConstraintViolationException(Exception ex) {
-        ErrorResponseDto errorResponseDto = new ErrorResponseDto("INVALID_AMOUNT",  "Parameter 'amount' must be a positive number");
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponseDto> handleConstraintViolationException(ConstraintViolationException ex) {
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto("INVALID_AMOUNT", ex.getMessage());
         return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);
     }
 

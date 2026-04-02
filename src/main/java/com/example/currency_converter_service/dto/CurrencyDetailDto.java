@@ -1,5 +1,6 @@
 package com.example.currency_converter_service.dto;
 
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 import java.time.LocalDate;

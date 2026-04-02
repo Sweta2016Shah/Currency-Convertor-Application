@@ -4,6 +4,7 @@ import com.example.currency_converter_service.dto.CurrencyDetailDto;
 import com.example.currency_converter_service.service.CurrencyConvertorService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class CurrencyConvertorController {
     @GetMapping("/convert")
     public ResponseEntity<CurrencyDetailDto> getConvertedCurrency(@RequestParam String from,
                                                                   @RequestParam String to,
-                                                                  @RequestParam @Digits(integer = 5, fraction = 2) Double amount){
+                                                                  @RequestParam @Positive(message = "Parameter 'amount' must be a positive number") Double amount){
         CurrencyDetailDto currencyDetailDto = currencyConvertorService.convertCurrency(from, to, amount);
         return new ResponseEntity<>(currencyDetailDto, HttpStatus.OK);
     }
